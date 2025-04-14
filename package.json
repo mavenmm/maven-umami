@@ -43,7 +43,6 @@
     "lint": "next lint --quiet",
     "prepare": "node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky install",
     "postbuild": "node scripts/postbuild.js",
-    "postinstall": "prisma generate --schema=./db/postgresql/schema.prisma",
     "test": "jest",
     "cypress-open": "cypress open cypress run",
     "cypress-run": "cypress run cypress run"

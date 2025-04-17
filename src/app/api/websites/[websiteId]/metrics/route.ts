@@ -18,14 +18,10 @@ import { json, unauthorized, badRequest } from '@/lib/response';
 import { getPageviewMetrics, getSessionMetrics, getChannelMetrics } from '@/queries';
 import { filterParams } from '@/lib/schema';
 
-const DEBUG = true
-
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ websiteId: string }> },
 ) {
-  if (DEBUG) console.log('Metrics API called with params:', await params);
-
   const schema = z.object({
     type: z.string(),
     startAt: z.coerce.number().int(),
@@ -67,9 +63,7 @@ export async function GET(
   }
 
   if (SESSION_COLUMNS.includes(type)) {
-    if (DEBUG) console.log('Processing session metrics for type:', type);
     const data = await getSessionMetrics(websiteId, type, filters, limit, offset);
-    if (DEBUG) console.log('Session metrics data:', data);
 
     if (type === 'language') {
       const combined = {};
